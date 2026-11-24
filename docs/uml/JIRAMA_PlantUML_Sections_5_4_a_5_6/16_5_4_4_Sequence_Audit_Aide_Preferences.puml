@@ -1,0 +1,19 @@
+@startuml
+ title Journal d'activite, aide et preferences de l'Agent
+ autonumber
+ actor Agent as A
+ participant "Systeme JIRAMA" as S
+ opt Consultation du journal
+   A -> S : Demander le journal d'activite
+   S -> S : Verifier les droits et rechercher les evenements accessibles
+   S --> A : Afficher les evenements autorises
+ 
+   A -> S : Ouvrir le centre d'aide
+   S --> A : Afficher les rubriques d'assistance
+ 
+   A -> S : Consulter les preferences
+   S --> A : Afficher les preferences disponibles
+   A -> S : Enregistrer les preferences modifiees
+   S -> S : Verifier et enregistrer les preferences
+   S --> A : Confirmer la mise a jour
+ 

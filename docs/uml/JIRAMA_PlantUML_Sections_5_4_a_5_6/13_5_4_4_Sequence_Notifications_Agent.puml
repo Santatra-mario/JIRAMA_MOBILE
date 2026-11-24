@@ -1,0 +1,18 @@
+@startuml
+ title  Gestion des notifications de l'Agent
+ autonumber
+ actor Agent as A
+ participant "Systeme JIRAMA" as S
+ A -> S : Consulter ses notifications
+ S --> A : Afficher les notifications du compte
+ 
+   A -> S : Demander le marquage comme lue
+   S -> S : Verifier le proprietaire et mettre a jour le statut
+   S --> A : Confirmer la mise a jour
+ 
+   A -> S : Demander l'archivage ou la suppression
+   S -> S : Verifier les droits et appliquer l'action
+   S --> A : Confirmer ou refuser l'action
+
+   A -> S : Demander les notifications archivees
+   S --> A : Afficher les archives disponibles

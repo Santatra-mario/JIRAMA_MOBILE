@@ -1,0 +1,14 @@
+@startuml
+ title Generation et partage d'un releve PDF
+ autonumber
+ actor Agent as A
+ participant "Systeme JIRAMA" as S
+ A -> S : Selectionner un releve et demander le PDF
+ S -> S : Verifier l'acces au releve
+ 
+   S -> S : Composer le document a partir des donnees du releve
+   S --> A : Fournir le document PDF
+   A -> S : Demander le partage ou l'impression
+   S --> A : Ouvrir les options natives de partage ou d'impression
+ 
+   S --> A : Afficher un message d'erreur

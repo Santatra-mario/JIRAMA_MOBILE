@@ -1,0 +1,16 @@
+@startuml
+ title  Suppression d'un releve par l'Administrateur
+ autonumber
+ actor Administrateur as A
+ participant "Systeme JIRAMA" as S
+ A -> S : Selectionner un releve et demander sa suppression
+ S -> S : Verifier le role Administrateur et les contraintes
+ 
+   S --> A : Demander confirmation
+   A -> S : Confirmer la suppression
+   S -> S : Supprimer le releve selon les regles du systeme
+   S --> A : Confirmer la suppression
+ 
+   S --> A : Refuser et expliquer le motif
+
+ @enduml

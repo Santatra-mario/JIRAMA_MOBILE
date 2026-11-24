@@ -1,0 +1,15 @@
+@startuml
+ title Consultation du tableau de bord et des statistiques
+ autonumber
+ actor Responsable as R
+ participant "Systeme JIRAMA" as S
+ R -> S : Ouvrir le tableau de bord
+ S -> S : Verifier les droits de consultation
+ S -> S : Construire les indicateurs a partir des donnees disponibles
+ S --> R : Afficher les indicateurs et visualisations
+ R -> S : Choisir une periode ou un filtre disponible
+ S -> S : Appliquer les criteres de filtrage
+ S --> R : Actualiser les resultats et graphiques
+ 
+   S --> R : Signaler que les indicateurs ne peuvent pas etre calcules
+ 

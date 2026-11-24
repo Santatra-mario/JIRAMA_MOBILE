@@ -1,0 +1,191 @@
+@startuml
+' JIRAMA ANTSIRABE - Diagramme global des cas d'utilisation
+' Plateforme integree Web et mobile - disposition verticale
+
+title 5.4.1 - Diagramme global des cas d'utilisation\nPlateforme integree JIRAMA Web et mobile
+
+top to bottom direction
+
+skinparam shadowing false
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam nodesep 22
+skinparam ranksep 28
+skinparam ArrowColor #536B80
+skinparam actorStyle stickman
+skinparam packageBorderColor #8298AC
+skinparam packageFontColor #17324D
+skinparam packageTitleAlignment center
+skinparam usecase {
+  BackgroundColor #F3F7FB
+  BorderColor #527A9B
+  FontColor #17324D
+}
+
+' Acteurs : hierarchie verticale
+actor "Utilisateur authentifie" as UTIL
+actor "Administrateur" as ADMIN
+actor "Responsable" as RESP
+actor "Agent de terrain" as AGENT
+
+ADMIN -up-|> UTIL
+RESP -up-|> UTIL
+AGENT -up-|> UTIL
+
+' Alignement vertical des acteurs
+UTIL -[hidden]down-> ADMIN
+ADMIN -[hidden]down-> RESP
+RESP -[hidden]down-> AGENT
+
+rectangle "PLATEFORME INTEGREE JIRAMA WEB ET MOBILE" as SYSTEM {
+
+  package "01 - Fonctions communes" {
+    usecase "S'authentifier" as UC_AUTH
+    usecase "Se deconnecter" as UC_LOGOUT
+    usecase "Consulter son profil" as UC_PROFILE
+    usecase "Modifier son mot de passe" as UC_PASSWORD
+    usecase "Consulter les abonnes" as UC_ABONNES
+    usecase "Consulter les compteurs" as UC_COMPTEURS
+    usecase "Consulter les releves et l'historique" as UC_HISTO
+    usecase "Consulter et analyser les anomalies" as UC_ANOMALIES
+
+    ' Empilement vertical des cas d'utilisation
+    UC_AUTH -[hidden]down-> UC_LOGOUT
+    UC_LOGOUT -[hidden]down-> UC_PROFILE
+    UC_PROFILE -[hidden]down-> UC_PASSWORD
+    UC_PASSWORD -[hidden]down-> UC_ABONNES
+    UC_ABONNES -[hidden]down-> UC_COMPTEURS
+    UC_COMPTEURS -[hidden]down-> UC_HISTO
+    UC_HISTO -[hidden]down-> UC_ANOMALIES
+  }
+
+  package "02 - Web : Administration" {
+    usecase "Gerer les comptes et les roles" as UC_USERS
+    usecase "Gerer les abonnes" as UC_GEST_ABONNES
+    usecase "Modifier les compteurs et leur statut" as UC_GEST_COMPTEURS
+    usecase "Supprimer un releve" as UC_DELETE_RELEVE
+    usecase "Definir le statut final d'une anomalie" as UC_STATUT_FINAL
+
+    UC_USERS -[hidden]down-> UC_GEST_ABONNES
+    UC_GEST_ABONNES -[hidden]down-> UC_GEST_COMPTEURS
+    UC_GEST_COMPTEURS -[hidden]down-> UC_DELETE_RELEVE
+    UC_DELETE_RELEVE -[hidden]down-> UC_STATUT_FINAL
+  }
+
+  package "03 - Web : Supervision" {
+    usecase "Creer une campagne de controle" as UC_CAMPAGNE
+    usecase "Definir les dates de la campagne" as UC_DATES
+    usecase "Affecter des agents" as UC_AFFECTER
+    usecase "Ajouter des missions" as UC_MISSIONS
+    usecase "Publier une campagne" as UC_PUBLIER
+    usecase "Cloturer une campagne" as UC_CLOTURER
+    usecase "Suivre l'avancement des missions" as UC_SUIVI_MISSION
+    usecase "Consulter le tableau de bord" as UC_DASHBOARD
+    usecase "Consulter les statistiques et comparaisons" as UC_STATS
+    usecase "Creer ou modifier un releve" as UC_RELEVE_WEB
+
+    UC_CAMPAGNE -[hidden]down-> UC_DATES
+    UC_DATES -[hidden]down-> UC_AFFECTER
+    UC_AFFECTER -[hidden]down-> UC_MISSIONS
+    UC_MISSIONS -[hidden]down-> UC_PUBLIER
+    UC_PUBLIER -[hidden]down-> UC_CLOTURER
+    UC_CLOTURER -[hidden]down-> UC_SUIVI_MISSION
+    UC_SUIVI_MISSION -[hidden]down-> UC_DASHBOARD
+    UC_DASHBOARD -[hidden]down-> UC_STATS
+    UC_STATS -[hidden]down-> UC_RELEVE_WEB
+  }
+
+  package "04 - Mobile : Agent de terrain" {
+    usecase "Consulter ses missions affectees" as UC_MISSION_AGENT
+    usecase "Consulter le detail d'une mission" as UC_DETAIL_MISSION
+    usecase "Preparer une intervention" as UC_PREPARER
+    usecase "Effectuer un controle sur le terrain" as UC_CONTROLE
+    usecase "Mettre a jour le statut d'une mission" as UC_STATUT_MISSION
+    usecase "Ajouter une observation de terrain" as UC_OBSERVATION
+    usecase "Creer un compteur si autorise" as UC_CREER_COMPTEUR
+    usecase "Saisir un nouvel index" as UC_SAISIR_INDEX
+    usecase "Corriger un releve autorise" as UC_CORRIGER_RELEVE
+    usecase "Gerer ses notifications" as UC_NOTIFICATIONS
+    usecase "Consulter les notifications archivees" as UC_ARCHIVES
+    usecase "Generer et partager un releve PDF" as UC_PDF
+    usecase "Consulter le journal d'activite" as UC_AUDIT
+    usecase "Consulter le centre d'aide" as UC_AIDE
+    usecase "Gerer ses preferences" as UC_PREFS
+
+    UC_MISSION_AGENT -[hidden]down-> UC_DETAIL_MISSION
+    UC_DETAIL_MISSION -[hidden]down-> UC_PREPARER
+    UC_PREPARER -[hidden]down-> UC_CONTROLE
+    UC_CONTROLE -[hidden]down-> UC_STATUT_MISSION
+    UC_STATUT_MISSION -[hidden]down-> UC_OBSERVATION
+    UC_OBSERVATION -[hidden]down-> UC_CREER_COMPTEUR
+    UC_CREER_COMPTEUR -[hidden]down-> UC_SAISIR_INDEX
+    UC_SAISIR_INDEX -[hidden]down-> UC_CORRIGER_RELEVE
+    UC_CORRIGER_RELEVE -[hidden]down-> UC_NOTIFICATIONS
+    UC_NOTIFICATIONS -[hidden]down-> UC_ARCHIVES
+    UC_ARCHIVES -[hidden]down-> UC_PDF
+    UC_PDF -[hidden]down-> UC_AUDIT
+    UC_AUDIT -[hidden]down-> UC_AIDE
+    UC_AIDE -[hidden]down-> UC_PREFS
+  }
+
+  ' Force l'empilement vertical des quatre blocs fonctionnels
+  UC_ANOMALIES -[hidden]down-> UC_USERS
+  UC_STATUT_FINAL -[hidden]down-> UC_CAMPAGNE
+  UC_RELEVE_WEB -[hidden]down-> UC_MISSION_AGENT
+}
+
+' Fonctions communes : accessibles selon les droits applicatifs.
+' Les trois profils specialises heritent des associations de UTIL.
+UTIL -- UC_AUTH
+UTIL -- UC_LOGOUT
+UTIL -- UC_PROFILE
+UTIL -- UC_PASSWORD
+UTIL -- UC_ABONNES
+UTIL -- UC_COMPTEURS
+UTIL -- UC_HISTO
+UTIL -- UC_ANOMALIES
+
+' Administrateur
+ADMIN -- UC_USERS
+ADMIN -- UC_GEST_ABONNES
+ADMIN -- UC_GEST_COMPTEURS
+ADMIN -- UC_DELETE_RELEVE
+ADMIN -- UC_STATUT_FINAL
+
+' Responsable
+RESP -- UC_CAMPAGNE
+RESP -- UC_DATES
+RESP -- UC_AFFECTER
+RESP -- UC_MISSIONS
+RESP -- UC_PUBLIER
+RESP -- UC_CLOTURER
+RESP -- UC_SUIVI_MISSION
+RESP -- UC_DASHBOARD
+RESP -- UC_STATS
+RESP -- UC_RELEVE_WEB
+
+' Agent - application mobile
+AGENT -- UC_MISSION_AGENT
+AGENT -- UC_DETAIL_MISSION
+AGENT -- UC_PREPARER
+AGENT -- UC_CONTROLE
+AGENT -- UC_STATUT_MISSION
+AGENT -- UC_OBSERVATION
+AGENT -- UC_CREER_COMPTEUR
+AGENT -- UC_SAISIR_INDEX
+AGENT -- UC_CORRIGER_RELEVE
+AGENT -- UC_NOTIFICATIONS
+AGENT -- UC_ARCHIVES
+AGENT -- UC_PDF
+AGENT -- UC_AUDIT
+AGENT -- UC_AIDE
+AGENT -- UC_PREFS
+
+' Dependances metier
+UC_RELEVE_WEB ..> UC_HISTO : <<include>>
+UC_SAISIR_INDEX ..> UC_HISTO : <<include>>
+UC_OBSERVATION ..> UC_CONTROLE : <<extend>>
+
+@enduml

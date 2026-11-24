@@ -1,0 +1,16 @@
+@startuml
+ title 5.4.4 - Systeme : consultation des releves et de l'historique
+ autonumber
+ actor "Utilisateur habilite" as U
+ participant "Systeme JIRAMA" as S
+ U -> S : Demander les releves d'un compteur
+ S -> S : Verifier les droits de consultation
+ S -> S : Rechercher les releves associes au compteur
+ 
+   S --> U : Afficher les releves tries par date
+   U -> S : Demander le detail d'un releve
+   S --> U : Afficher les index, dates et observation
+ 
+   S --> U : Signaler qu'aucun releve n'est disponible
+
+ @enduml

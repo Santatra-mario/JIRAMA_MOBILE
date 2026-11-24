@@ -1,0 +1,19 @@
+@startuml
+ title Execution d'une mission par l'Agent
+ autonumber
+ actor Agent as A
+ participant "Systeme JIRAMA" as S
+ A -> S : Consulter ses missions affectees
+ S --> A : Afficher la liste des missions accessibles
+ A -> S : Selectionner une mission
+ S --> A : Afficher le detail et les consignes disponibles
+ A -> S : Demander la preparation de l'intervention
+ S --> A : Afficher les informations utiles au controle
+ A -> S : Enregistrer le resultat du controle et les observations
+ S -> S : Verifier les donnees saisies
+   S -> S : Enregistrer les observations
+   A -> S : Mettre a jour le statut de la mission
+   S -> S : Verifier les transitions de statut autorisees
+   S --> A : Confirmer la mise a jour
+   S --> A : Signaler les informations a corriger
+ 

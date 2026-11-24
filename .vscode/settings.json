@@ -1,0 +1,8 @@
+{
+  "plantuml.render": "Local",
+  "plantuml.diagramsRoot": "docs/uml",
+  "plantuml.exportOutDir": "docs/uml/export",
+  "plantuml.exportFormat": "svg",
+  "plantuml.exportSubFolder": false,
+  "plantuml.previewAutoUpdate": true
+}

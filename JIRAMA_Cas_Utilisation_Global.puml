@@ -1,0 +1,166 @@
+@startuml
+title Diagramme global de cas d'utilisation - Plateforme intégrée JIRAMA Web et mobile
+left to right direction
+
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam ArrowColor #526579
+skinparam actor {
+  BorderColor #20364B
+  BackgroundColor #FFFFFF
+}
+skinparam usecase {
+  BackgroundColor #EEF5FA
+  BorderColor #2F6690
+}
+skinparam package {
+  BackgroundColor #F8FAFC
+  BorderColor #8EA3B5
+}
+
+actor "Utilisateur authentifié" as UTIL
+actor "Administrateur" as ADMIN
+actor "Responsable" as RESP
+actor "Agent" as AGENT
+
+ADMIN --|> UTIL
+RESP --|> UTIL
+AGENT --|> UTIL
+
+rectangle "PLATEFORME INTÉGRÉE JIRAMA WEB ET MOBILE" {
+
+  package "Fonctionnalités transversales" {
+    usecase "S'authentifier" as UC_AUTH
+    usecase "Se déconnecter" as UC_LOGOUT
+    usecase "Consulter son profil" as UC_PROFILE
+    usecase "Modifier son mot de passe" as UC_PASSWORD
+    usecase "Consulter les abonnés" as UC_VIEW_SUBSCRIBERS
+    usecase "Consulter les compteurs" as UC_VIEW_METERS
+    usecase "Consulter les relevés et leur historique" as UC_VIEW_READINGS
+    usecase "Consulter et analyser les anomalies" as UC_ANALYZE_ANOMALIES
+    usecase "Contrôler la cohérence des index" as UC_CHECK_INDEX
+    usecase "Calculer la consommation\nsi l'index précédent est valide" as UC_CALC_CONSUMPTION
+  }
+
+  package "Espace Web - administration et supervision" {
+    usecase "Gérer les comptes utilisateurs\net les rôles" as UC_USERS
+    usecase "Gérer les abonnés\n(modifier, changer le statut, supprimer)" as UC_SUBSCRIBERS
+    usecase "Modifier les compteurs\net changer leur statut" as UC_MANAGE_METERS
+    usecase "Créer ou modifier un relevé" as UC_WRITE_READINGS
+    usecase "Supprimer un relevé" as UC_DELETE_READING
+    usecase "Définir le statut final\nd'une anomalie" as UC_FINAL_ANOMALY_STATUS
+    usecase "Créer une campagne de contrôle" as UC_CREATE_CAMPAIGN
+    usecase "Définir les dates d'une campagne" as UC_SET_CAMPAIGN_DATES
+    usecase "Affecter des agents" as UC_ASSIGN_AGENTS
+    usecase "Ajouter des missions" as UC_ADD_MISSIONS
+    usecase "Publier une campagne" as UC_PUBLISH_CAMPAIGN
+    usecase "Clôturer une campagne" as UC_CLOSE_CAMPAIGN
+    usecase "Modifier le suivi d'une mission" as UC_UPDATE_MISSION
+    usecase "Consulter les notifications" as UC_VIEW_NOTIFICATIONS
+    usecase "Consulter le tableau de bord" as UC_DASHBOARD
+    usecase "Consulter les statistiques,\ngraphiques et comparaisons" as UC_STATISTICS
+  }
+
+  package "Application mobile - Agent de terrain" {
+    usecase "Consulter ses missions affectées" as UC_AGENT_MISSIONS
+    usecase "Consulter le détail d'une mission" as UC_AGENT_MISSION_DETAILS
+    usecase "Préparer une mission" as UC_PREPARE_MISSION
+    usecase "Effectuer un contrôle sur le terrain" as UC_FIELD_CONTROL
+    usecase "Mettre à jour le statut d'une mission" as UC_AGENT_UPDATE_STATUS
+    usecase "Créer un compteur\n(selon les droits de la route)" as UC_AGENT_CREATE_METER
+    usecase "Saisir un nouvel index" as UC_AGENT_ENTER_READING
+    usecase "Corriger un relevé créé par son compte" as UC_AGENT_EDIT_READING
+    usecase "Ajouter une observation de terrain" as UC_AGENT_OBSERVATION
+    usecase "Gérer ses notifications\n(lire, archiver, supprimer)" as UC_AGENT_NOTIFICATIONS
+    usecase "Consulter les notifications archivées" as UC_AGENT_ARCHIVES
+    usecase "Générer et partager un relevé PDF" as UC_AGENT_PDF
+    usecase "Consulter le journal d'activité" as UC_AGENT_AUDIT
+    usecase "Consulter le centre d'aide" as UC_AGENT_HELP
+    usecase "Gérer ses préférences" as UC_AGENT_PREFERENCES
+  }
+}
+
+' Fonctionnalités communes héritées par les trois profils
+UTIL --> UC_AUTH
+UTIL --> UC_LOGOUT
+UTIL --> UC_PROFILE
+UTIL --> UC_PASSWORD
+
+' Les trois profils disposent des consultations et de l'analyse prévues par les droits backend
+ADMIN --> UC_VIEW_SUBSCRIBERS
+ADMIN --> UC_VIEW_METERS
+ADMIN --> UC_VIEW_READINGS
+ADMIN --> UC_ANALYZE_ANOMALIES
+RESP --> UC_VIEW_SUBSCRIBERS
+RESP --> UC_VIEW_METERS
+RESP --> UC_VIEW_READINGS
+RESP --> UC_ANALYZE_ANOMALIES
+AGENT --> UC_VIEW_SUBSCRIBERS
+AGENT --> UC_VIEW_METERS
+AGENT --> UC_VIEW_READINGS
+AGENT --> UC_ANALYZE_ANOMALIES
+
+' Administrateur : gestion des accès et opérations sensibles
+ADMIN --> UC_USERS
+ADMIN --> UC_SUBSCRIBERS
+ADMIN --> UC_MANAGE_METERS
+ADMIN --> UC_DELETE_READING
+ADMIN --> UC_FINAL_ANOMALY_STATUS
+
+' Responsable : supervision, campagnes, missions et analyses
+RESP --> UC_WRITE_READINGS
+RESP --> UC_CREATE_CAMPAIGN
+RESP --> UC_SET_CAMPAIGN_DATES
+RESP --> UC_ASSIGN_AGENTS
+RESP --> UC_ADD_MISSIONS
+RESP --> UC_PUBLISH_CAMPAIGN
+RESP --> UC_CLOSE_CAMPAIGN
+RESP --> UC_UPDATE_MISSION
+RESP --> UC_VIEW_NOTIFICATIONS
+RESP --> UC_DASHBOARD
+RESP --> UC_STATISTICS
+
+' Agent : opérations de terrain dans l'application mobile
+AGENT --> UC_AGENT_MISSIONS
+AGENT --> UC_AGENT_MISSION_DETAILS
+AGENT --> UC_PREPARE_MISSION
+AGENT --> UC_FIELD_CONTROL
+AGENT --> UC_AGENT_UPDATE_STATUS
+AGENT --> UC_AGENT_CREATE_METER
+AGENT --> UC_AGENT_ENTER_READING
+AGENT --> UC_AGENT_EDIT_READING
+AGENT --> UC_AGENT_NOTIFICATIONS
+AGENT --> UC_AGENT_ARCHIVES
+AGENT --> UC_AGENT_PDF
+AGENT --> UC_AGENT_AUDIT
+AGENT --> UC_AGENT_HELP
+AGENT --> UC_AGENT_PREFERENCES
+
+' Relations include et extend : sens UML respecté
+UC_WRITE_READINGS .> UC_CHECK_INDEX : <<include>>
+UC_AGENT_ENTER_READING .> UC_CHECK_INDEX : <<include>>
+UC_CALC_CONSUMPTION .> UC_WRITE_READINGS : <<extend>>\n[index précédent valide]
+UC_CALC_CONSUMPTION .> UC_AGENT_ENTER_READING : <<extend>>\n[index précédent valide]
+UC_AGENT_OBSERVATION .> UC_AGENT_ENTER_READING : <<extend>>
+UC_PUBLISH_CAMPAIGN .> UC_CREATE_CAMPAIGN : <<extend>>\n[campagne prête à publier]
+UC_AGENT_ARCHIVES .> UC_AGENT_NOTIFICATIONS : <<extend>>\n[consultation des archives demandée]
+
+note bottom of UC_FINAL_ANOMALY_STATUS
+  La décision finale sur le statut d'une anomalie
+  est réservée à l'Administrateur selon les droits
+  décrits dans le dossier du projet.
+end note
+
+note bottom of UC_AGENT_CREATE_METER
+  La création est limitée au périmètre autorisé
+  par la route backend.
+end note
+
+note bottom of UC_AGENT_EDIT_READING
+  La correction est limitée aux relevés créés
+  par le compte Agent connecté, selon l'écran fourni.
+end note
+
+@enduml

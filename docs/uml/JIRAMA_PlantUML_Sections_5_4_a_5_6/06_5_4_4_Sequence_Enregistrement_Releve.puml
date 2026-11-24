@@ -1,0 +1,20 @@
+@startuml
+ title  Enregistrement d'un releve
+ autonumber
+ actor "Agent ou Responsable" as U
+ participant "Systeme JIRAMA" as S
+ U -> S : Choisir un compteur et demander le formulaire de releve
+ S --> U : Afficher les informations du compteur et l'ancien index disponible
+ U -> S : Saisir la date, le nouvel index et une observation eventuelle
+ S -> S : Verifier les champs et la coherence de l'index
+ 
+   S -> S : Calculer la consommation a partir des index
+ 
+   S -> S : Enregistrer sans inventer de consommation
+
+   S -> S : Enregistrer le releve
+   S --> U : Confirmer l'enregistrement et afficher le resultat
+ 
+   S --> U : Afficher les erreurs de validation
+
+ @enduml

@@ -1,0 +1,16 @@
+@startuml
+ title  Mise a jour du statut final d'une anomalie
+ autonumber
+ actor Administrateur as A
+ participant "Systeme JIRAMA" as S
+ A -> S : Ouvrir une anomalie et consulter son dossier
+ S --> A : Afficher les informations disponibles
+ A -> S : Demander une mise a jour du statut final
+ S -> S : Verifier le role Administrateur et les valeurs autorisees
+ 
+   S -> S : Enregistrer le nouveau statut
+   S --> A : Confirmer la mise a jour
+ 
+   S --> A : Refuser la mise a jour et signaler le motif
+ 
+ @enduml

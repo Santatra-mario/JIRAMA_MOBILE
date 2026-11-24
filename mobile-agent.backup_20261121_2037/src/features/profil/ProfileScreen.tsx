@@ -1,0 +1,12 @@
+import React from 'react';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useAuth } from '../../auth/AuthContext';
+import { COLORS } from '../../theme/colors';
+
+export default function ProfileScreen() {
+  const { user, signOut } = useAuth();
+  const confirmSignOut = () => Alert.alert('Déconnexion', 'Voulez-vous quitter votre espace Agent ?', [{ text: 'Annuler', style: 'cancel' }, { text: 'Déconnexion', style: 'destructive', onPress: () => { void signOut(); } }]);
+  return <View style={styles.screen}><View style={styles.card}><View style={styles.avatar}><Text style={styles.avatarText}>{(user?.prenom?.[0] || 'A').toUpperCase()}</Text></View><Text style={styles.name}>{[user?.prenom, user?.nom].filter(Boolean).join(' ') || 'Agent JIRAMA'}</Text><Text style={styles.role}>AGENT DE TERRAIN</Text><Info label="Identifiant" value={user?.identifiant || '—'} /><Info label="E-mail" value={user?.email || 'Non renseigné'} /><Info label="Statut du compte" value={user?.statut || '—'} /></View><Pressable onPress={confirmSignOut} style={styles.signOut}><Text style={styles.signOutText}>Se déconnecter</Text></Pressable></View>;
+}
+function Info({ label, value }: { label: string; value: string }) { return <View style={styles.info}><Text style={styles.label}>{label}</Text><Text style={styles.value}>{value}</Text></View>; }
+const styles = StyleSheet.create({ screen: { flex: 1, backgroundColor: COLORS.background, padding: 16 }, card: { backgroundColor: '#FFFFFF', borderRadius: 17, borderColor: COLORS.border, borderWidth: 1, padding: 19, alignItems: 'center' }, avatar: { width: 68, height: 68, borderRadius: 34, backgroundColor: COLORS.blueLight, alignItems: 'center', justifyContent: 'center' }, avatarText: { fontSize: 28, fontWeight: '900', color: COLORS.blue }, name: { color: COLORS.text, fontSize: 19, fontWeight: '900', marginTop: 12 }, role: { color: COLORS.blue, fontSize: 10, fontWeight: '900', letterSpacing: 1, marginTop: 5, marginBottom: 20 }, info: { width: '100%', paddingVertical: 12, borderTopWidth: 1, borderTopColor: COLORS.border }, label: { color: COLORS.muted, fontSize: 10, fontWeight: '800' }, value: { color: COLORS.text, fontSize: 13, fontWeight: '700', marginTop: 4 }, signOut: { backgroundColor: COLORS.dangerBg, borderRadius: 12, minHeight: 50, alignItems: 'center', justifyContent: 'center', marginTop: 15 }, signOutText: { color: COLORS.danger, fontSize: 13, fontWeight: '900' } });

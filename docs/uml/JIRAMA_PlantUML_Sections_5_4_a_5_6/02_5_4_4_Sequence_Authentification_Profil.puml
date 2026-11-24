@@ -1,0 +1,25 @@
+@startuml
+ title  Authentification et gestion du profil
+ autonumber
+ actor "Utilisateur" as U
+ participant "Systeme JIRAMA" as S
+ U -> S : Soumettre identifiant et mot de passe
+ activate S
+ S -> S : Verifier les informations et le statut du compte
+
+   S --> U : Confirmer la connexion et ouvrir l'espace autorise
+   S --> U : Afficher un message de refus
+ 
+ U -> S : Consulter le profil
+ S --> U : Afficher les informations autorisees
+ U -> S : Demander le changement de mot de passe
+ S --> U : Confirmer les regles et demander les champs requis
+ U -> S : Soumettre le mot de passe actuel et le nouveau
+ S -> S : Verifier l'ancien mot de passe et la politique de securite
+
+   S --> U : Confirmer la modification
+   S --> U : Signaler le motif du refus
+
+ U -> S : Se deconnecter
+ S --> U : Confirmer la fin de session
+ @enduml

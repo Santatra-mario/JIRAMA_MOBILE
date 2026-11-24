@@ -1,0 +1,122 @@
+@startuml
+ title 5.6 - Modele conceptuel du domaine JIRAMA
+ left to right direction
+ skinparam classAttributeIconSize 0
+ skinparam shadowing false
+ skinparam linetype ortho
+ skinparam defaultFontName Arial
+ skinparam defaultFontSize 11
+ skinparam nodesep 35
+ skinparam ranksep 45
+
+ enum Role {
+   ADMINISTRATEUR
+   RESPONSABLE
+   AGENT
+ }
+
+ class Utilisateur {
+   id
+   identifiant
+   nom
+   prenom
+   email
+   statutCompte
+   role : Role
+ }
+
+ class Abonne {
+   id
+   numeroAbonne
+   nom
+   prenom
+ }
+
+ class Compteur {
+   id
+   numeroCompteur
+   typeCompteur
+   unite
+   statut
+ }
+
+ class Releve {
+   id
+   typeReleve
+   dateReleve
+   dateAncienReleve
+   ancienIndex
+   nouvelIndex
+   consommation
+   observation
+ }
+
+ class Anomalie {
+   id
+   typeAnomalie
+   niveau
+   description
+   statut
+   dateSignalement
+ }
+
+ class CampagneControle {
+   id
+   libelle
+   dateDebut
+   dateFin
+   statut
+ }
+
+ class Mission {
+   id
+   objet
+   datePrevue
+   statut
+ }
+
+ class Affectation {
+   id
+   dateAffectation
+   statut
+ }
+
+ class Notification {
+   id
+   sujet
+   message
+   statut
+   dateCreation
+ }
+
+ class JournalAudit {
+   id
+   action
+   ressourceType
+   ressourceId
+   resultat
+   dateCreation
+ }
+
+ class PreferenceUtilisateur {
+   theme
+   affichageCompact
+   reductionAnimations
+ }
+
+ Utilisateur --> Role : possede un role
+ Abonne "1" -- "0..*" Compteur : detient
+ Compteur "1" -- "0..*" Releve : historique
+ Utilisateur "1" -- "0..*" Releve : saisit / corrige
+ Compteur "1" -- "0..*" Anomalie : fait l'objet de
+ Abonne "1" -- "0..*" Anomalie : concerne
+ Utilisateur "1" -- "0..*" Anomalie : signale / analyse
+ Utilisateur "1" -- "0..*" CampagneControle : cree
+ CampagneControle "1" *-- "0..*" Mission : regroupe
+ Mission "1" -- "0..*" Affectation : comporte
+ Utilisateur "1" -- "0..*" Affectation : agent affecte
+ Utilisateur "1" -- "0..*" Notification : recoit
+ Utilisateur "1" -- "0..*" JournalAudit : declenche
+ Utilisateur "1" -- "0..1" PreferenceUtilisateur : configure
+
+ 

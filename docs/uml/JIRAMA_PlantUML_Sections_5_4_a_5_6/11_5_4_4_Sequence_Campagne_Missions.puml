@@ -1,0 +1,30 @@
+@startuml
+ title  Creation et organisation d'une campagne de controle
+ autonumber
+ actor Responsable as R
+ participant "Systeme JIRAMA" as S
+ R -> S : Demander la creation d'une campagne
+ S --> R : Afficher le formulaire
+ R -> S : Saisir les informations et les dates
+ S -> S : Verifier les champs et la coherence des dates
+ alt Donnees valides
+   S -> S : Enregistrer la campagne
+   S --> R : Confirmer la creation
+   R -> S : Ajouter une ou plusieurs missions
+   S -> S : Associer les missions a la campagne
+   S --> R : Confirmer l'ajout
+   R -> S : Affecter les agents aux missions
+   S -> S : Verifier les agents et enregistrer les affectations
+   S --> R : Confirmer les affectations
+   R -> S : Demander la publication de la campagne
+   S -> S : Verifier que les informations requises sont presentes
+   S --> R : Confirmer la publication ou signaler les elements manquants
+ else Donnees invalides
+   S --> R : Afficher les erreurs de saisie
+ 
+ opt Cloture de campagne
+   R -> S : Demander la cloture de la campagne
+   S -> S : Verifier les conditions de cloture
+   S --> R : Confirmer ou refuser la cloture
+ 
+ @enduml

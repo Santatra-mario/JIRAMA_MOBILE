@@ -1,0 +1,23 @@
+@startuml
+ title 5.4.4 - Systeme : gestion des utilisateurs et des roles
+ autonumber
+ actor Administrateur as A
+ participant "Systeme JIRAMA" as S
+ A -> S : Ouvrir la gestion des utilisateurs
+ S --> A : Afficher la liste autorisee
+ A -> S : Rechercher ou selectionner un compte
+ S --> A : Afficher le detail du compte
+ A -> S : Creer ou modifier un compte et choisir un role
+ S -> S : Verifier les champs et les droits Administrateur
+ alt Donnees valides
+   S -> S : Enregistrer les modifications
+   S --> A : Confirmer l'operation
+ else Donnees invalides ou droit insuffisant
+   S --> A : Afficher les erreurs
+ end
+ opt Changement de statut ou suppression
+   A -> S : Demander le changement de statut ou la suppression
+   S -> S : Verifier les contraintes et les autorisations
+   S --> A : Confirmer ou refuser l'operation
+ end
+ @enduml

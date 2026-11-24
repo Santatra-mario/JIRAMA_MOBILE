@@ -1,0 +1,14 @@
+@startuml
+ title 5.4.4 - Systeme : consultation et analyse des anomalies
+ autonumber
+ actor "Utilisateur habilite" as U
+ participant "Systeme JIRAMA" as S
+ U -> S : Demander les anomalies
+ S -> U : Afficher les anomalies accessibles
+ U -> S : Demander l'analyse d'un compteur ou d'une situation
+ S -> S : Appliquer les criteres d'analyse configures
+ alt Situation inhabituelle identifiee
+   S --> U : Presenter un signal ou une anomalie a verifier
+ else Aucun signal identifie
+   S --> U : Presenter le resultat de l'analyse
+ @enduml

@@ -1,0 +1,13 @@
+@startuml
+ title  Consultation des abonnes et des compteurs
+ autonumber
+ actor "Utilisateur habilite" as U
+ participant "Systeme JIRAMA" as S
+ U -> S : Demander la liste des abonnes ou compteurs
+ S --> U : Afficher les donnees accessibles
+ U -> S : Saisir un critere de recherche ou un filtre
+ S -> S : Appliquer les criteres et les droits d'acces
+ S --> U : Retourner les resultats correspondants
+ U -> S : Selectionner un abonne ou un compteur
+ S --> U : Afficher la fiche et les informations associees
+ @enduml

@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "JIRAMA Agent",
+    "slug": "jirama-agent",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "android": {
+      "package": "mg.jirama.antsirabe.agent",
+      "versionCode": 1
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@startuml
+ title   correction d'un releve autorise
+ autonumber
+ actor "Agent ou Responsable" as U
+ participant "Systeme JIRAMA" as S
+ U -> S : Demander la correction d'un releve
+ S -> S : Verifier le role et le droit sur ce releve
+ 
+   S --> U : Afficher le formulaire de correction
+   U -> S : Soumettre les valeurs corrigees
+   S -> S : Verifier les dates et la coherence des index
+   
+     S -> S : Enregistrer la correction et recalculer si possible
+     S --> U : Confirmer la correction
+   
+     S --> U : Signaler les champs ou regles non respectes
+     S --> U : Refuser la correction
+ 
+ @enduml

@@ -1,0 +1,37 @@
+@startuml
+' Vue technique illustrative pour accompagner la specification des besoins techniques
+ title 5.5 - Vue d'architecture technique de la plateforme JIRAMA
+ left to right direction
+ skinparam componentStyle rectangle
+ skinparam shadowing false
+ skinparam defaultFontName Arial
+ skinparam defaultFontSize 11
+ skinparam linetype ortho
+
+ actor "Utilisateur Web" as UW
+ actor "Agent mobile" as AM
+
+ node "Poste utilisateur / navigateur" as WEB_DEVICE {
+   component "Application Web\nReact + Vite" as WEB
+ }
+
+ node "Telephone Android" as MOBILE_DEVICE {
+   component "Application mobile\nReact Native + Expo + TypeScript" as MOBILE
+ }
+
+ node "Serveur applicatif" as SERVER {
+   component "API REST\nNode.js + Express" as API
+   component "Authentification et autorisations\nJWT + bcrypt + controle des roles" as AUTH
+ }
+
+ database "Base de donnees\nPostgreSQL" as DB
+
+ UW --> WEB : Utilisation via navigateur
+ AM --> MOBILE : Utilisation sur le terrain
+ WEB --> API : Requetes HTTP / JSON
+ MOBILE --> API : Requetes HTTP / JSON
+ API --> AUTH : Verifier identite et role
+ API --> DB : Lire / ecrire les donnees
+
+
+ 

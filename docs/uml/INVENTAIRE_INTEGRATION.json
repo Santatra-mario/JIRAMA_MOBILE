@@ -1,0 +1,24 @@
+{
+  "project_archive": "JIRAMA_ANRB03 (2).zip",
+  "uml_archive": "JIRAMA_Diagrammes_UML_PlantUML.zip",
+  "original_project_files_extracted": 195,
+  "uml_puml_expected": 84,
+  "uml_puml_integrated": 84,
+  "uml_puml_structurally_valid": 84,
+  "uml_puml_structural_errors": 0,
+  "uml_markdown_files": 14,
+  "uml_json_files": 2,
+  "svg_exports_generated": 0,
+  "png_exports_generated": 0,
+  "excluded_real_env_files": [
+    "backend/.env",
+    "frontend/.env"
+  ],
+  "excluded_dependency_and_cache_entries_count": 21736,
+  "missing_required_files": [],
+  "plantuml_cli_compilation_performed": false,
+  "backend_js_node_check_total": 41,
+  "backend_js_node_check_errors": 0,
+  "frontend_build_performed": false,
+  "postgres_integration_test_performed": false
+}

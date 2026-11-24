@@ -1,0 +1,1358 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: var(--jr-fond, #f3f7fc);
+  color: var(--jr-texte, #0f172a);
+  font-family: Inter, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+:root {
+  /* Marque */
+  --jr-eau-fonce: #0a3566;
+  --jr-eau: #0f5fa8;
+  --jr-eau-clair: #2a8bd6;
+  --jr-eau-pale: #e6f1fb;
+  --jr-elec: #f39200;
+  --jr-elec-fonce: #d97e00;
+  --jr-elec-pale: #fff3df;
+  --jr-elec-anneau: #ffe2b0;
+  --jr-sur-elec: #0a3566; /* texte sur fond orange */
+
+  /* Fonds et surfaces */
+  --jr-fond: #edf2f7;
+  --jr-fond-debut: #e8eff7;
+  --jr-fond-fin: #f1f5f9;
+  --jr-surface: #f8fafc;
+  --jr-surface-secondaire: #e8eef5;
+  --jr-champ: #f0f4f8;
+
+  /* Texte */
+  --jr-texte: #172536;
+  --jr-texte-doux: #405166;
+  --jr-texte-faible: #53657b;
+  --jr-titre: #0a3566;
+  --jr-lien: #0f5fa8;
+  --jr-attention: #a85f00;
+
+  /* Bordures et focus */
+  --jr-bordure: #d5deea;
+  --jr-bordure-forte: #bdcad9;
+  --jr-focus: #0f5fa8;
+  --jr-focus-anneau: #e6f1fb;
+
+  /* États */
+  --jr-ok: #047857;
+  --jr-ok-pale: #d1fae5;
+  --jr-ok-anneau: #d1fae5;
+  --jr-err: #dc2626;
+  --jr-err-pale: #fef2f2;
+  --jr-err-bordure: #fecaca;
+  --jr-err-anneau: #fee2e2;
+  --jr-desactive-fond: #e2e8f0;
+  --jr-desactive-texte: #64748b;
+
+  /* Panneau gauche (dégradé bleu) et cartes d'avantages */
+  --jr-panneau-1: #0a3566;
+  --jr-panneau-2: #0f5fa8;
+  --jr-panneau-3: #2a8bd6;
+  --jr-av-eau: #bfe0fa;
+  --jr-av-analyse: #ffffff;
+
+  /* Décor d'arrière-plan */
+  --jr-vague-1: rgba(42, 139, 214, 0.14);
+  --jr-vague-2: rgba(15, 95, 168, 0.17);
+  --jr-vague-3: rgba(10, 53, 102, 0.22);
+  --jr-halo-elec: rgba(243, 146, 0, 0.2);
+  --jr-halo-eau: rgba(42, 139, 214, 0.22);
+  --jr-bulle-fond: rgba(42, 139, 214, 0.16);
+  --jr-bulle-bord: rgba(15, 95, 168, 0.35);
+  --jr-ecume: rgba(255, 255, 255, 0.7);
+}
+
+.dark {
+  /* Marque : l'eau et l'orange gardent leur identité */
+  --jr-eau-pale: rgba(42, 139, 214, 0.18);
+  --jr-elec-pale: rgba(243, 146, 0, 0.14);
+  --jr-elec-anneau: rgba(243, 146, 0, 0.32);
+
+  /* Fonds et surfaces : bleu nuit dérivé du bleu JIRAMA */
+  --jr-fond: #06182f;
+  --jr-fond-debut: #082447;
+  --jr-fond-fin: #101a30;
+  --jr-surface: #0d2646;
+  --jr-surface-secondaire: #12315a;
+  --jr-champ: #12315a;
+
+  /* Texte */
+  --jr-texte: #e8f0fa;
+  --jr-texte-doux: #b3c5dd;
+  --jr-texte-faible: #8fa6c4;
+  --jr-titre: #e2eefb;
+  --jr-lien: #6db6f0;
+  --jr-attention: #ffb347;
+
+  /* Bordures et focus */
+  --jr-bordure: #1f4170;
+  --jr-bordure-forte: #2e5a94;
+  --jr-focus: #6db6f0;
+  --jr-focus-anneau: rgba(109, 182, 240, 0.25);
+
+  /* États */
+  --jr-ok: #34d399;
+  --jr-ok-pale: rgba(52, 211, 153, 0.16);
+  --jr-ok-anneau: rgba(52, 211, 153, 0.25);
+  --jr-err: #f87171;
+  --jr-err-pale: rgba(248, 113, 113, 0.12);
+  --jr-err-bordure: rgba(248, 113, 113, 0.4);
+  --jr-err-anneau: rgba(248, 113, 113, 0.28);
+  --jr-desactive-fond: #1b3b66;
+  --jr-desactive-texte: #8fa6c4;
+
+  /* Panneau gauche : bleus plus profonds */
+  --jr-panneau-1: #051b38;
+  --jr-panneau-2: #0a3a70;
+  --jr-panneau-3: #16609e;
+
+  /* Décor : tons profonds, lueurs atténuées */
+  --jr-vague-1: rgba(42, 139, 214, 0.16);
+  --jr-vague-2: rgba(15, 95, 168, 0.3);
+  --jr-vague-3: rgba(5, 27, 56, 0.75);
+  --jr-halo-elec: rgba(243, 146, 0, 0.14);
+  --jr-halo-eau: rgba(42, 139, 214, 0.2);
+  --jr-bulle-fond: rgba(109, 182, 240, 0.14);
+  --jr-bulle-bord: rgba(109, 182, 240, 0.4);
+  --jr-ecume: rgba(109, 182, 240, 0.35);
+}
+
+/* =========================================================
+   PAGES D'AUTHENTIFICATION (Login / Register)
+========================================================= */
+.jr-page {
+  color-scheme: light;
+}
+.dark .jr-page {
+  color-scheme: dark;
+}
+
+/* Champs de saisie */
+.jr-field {
+  border-color: var(--jr-bordure-forte);
+  background-color: var(--jr-champ);
+  color: var(--jr-texte);
+  transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+.jr-field:hover:not(:disabled) {
+  border-color: var(--jr-texte-faible);
+}
+.jr-field:focus {
+  outline: none;
+  background-color: var(--jr-surface);
+  border-color: var(--jr-focus);
+  box-shadow: 0 0 0 4px var(--jr-focus-anneau);
+}
+.jr-field--ok {
+  border-color: var(--jr-ok);
+}
+.jr-field--ok:focus {
+  border-color: var(--jr-ok);
+  box-shadow: 0 0 0 4px var(--jr-ok-anneau);
+}
+.jr-field--err {
+  border-color: var(--jr-err);
+  background-color: var(--jr-surface);
+}
+.jr-field--err:focus {
+  border-color: var(--jr-err);
+  box-shadow: 0 0 0 4px var(--jr-err-anneau);
+}
+
+/* Remplissage automatique du navigateur : garde les couleurs du thème */
+.jr-field:-webkit-autofill {
+  -webkit-text-fill-color: var(--jr-texte);
+  caret-color: var(--jr-texte);
+  box-shadow: 0 0 0 1000px var(--jr-champ) inset;
+}
+.jr-field:-webkit-autofill:focus {
+  box-shadow: 0 0 0 1000px var(--jr-surface) inset,
+    0 0 0 4px var(--jr-focus-anneau);
+}
+
+/* Cartes de rôle, boutons et liens : focus clavier visible */
+.jr-role:focus-within {
+  box-shadow: 0 0 0 4px var(--jr-elec-anneau);
+}
+.jr-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--jr-elec-pale), 0 0 0 6px var(--jr-elec);
+}
+.jr-lien:focus-visible {
+  outline: 2px solid var(--jr-focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+@keyframes jr-entree {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes jr-secousse {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+@keyframes jr-progression {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes jr-pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* Vagues : défilement lent et continu (le tracé est périodique) */
+@keyframes jr-vague {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* Courant électrique qui circule le long du câble */
+@keyframes jr-flux {
+  to {
+    stroke-dashoffset: -96;
+  }
+}
+
+/* Bulles d'eau qui montent en se balançant */
+@keyframes jr-bulle {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.6);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate3d(var(--jr-derive, 18px), -55vh, 0) scale(1);
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(calc(var(--jr-derive, 18px) * -1), -112vh, 0)
+      scale(1.15);
+    opacity: 0;
+  }
+}
+/* Étincelles qui scintillent et dérivent */
+@keyframes jr-scintille {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.4);
+  }
+  45% {
+    opacity: 1;
+    transform: translate3d(var(--jr-dx, 8px), -16px, 0) scale(1);
+  }
+  70% {
+    opacity: 0.25;
+  }
+}
+/* Éclair rare et discret */
+@keyframes jr-eclair {
+  0%,
+  91%,
+  100% {
+    opacity: 0;
+  }
+  92% {
+    opacity: 0.9;
+  }
+  93.5% {
+    opacity: 0.15;
+  }
+  95% {
+    opacity: 0.75;
+  }
+  97% {
+    opacity: 0;
+  }
+}
+/* Les halos « respirent » */
+@keyframes jr-respire {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.14);
+    opacity: 1;
+  }
+}
+/* Houle : les vagues montent et descendent doucement */
+@keyframes jr-houle {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-12px);
+  }
+}
+
+.jr-entree {
+  animation: jr-entree 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.jr-secousse {
+  animation: jr-secousse 0.45s ease-in-out;
+}
+.jr-pop {
+  animation: jr-pop 0.5s ease-out both;
+}
+.jr-progression {
+  animation: jr-progression 3s linear forwards; /* durée réglée en ligne */
+}
+.jr-vague {
+  animation: jr-vague linear infinite; /* durée réglée en ligne */
+}
+.jr-flux {
+  stroke-dashoffset: 0;
+  animation: jr-flux 6s linear infinite;
+}
+.jr-bulle {
+  animation: jr-bulle linear infinite; /* durée et délai réglés en ligne */
+}
+.jr-scintille {
+  animation: jr-scintille ease-in-out infinite;
+}
+.jr-eclair {
+  animation: jr-eclair 14s linear infinite;
+}
+.jr-respire {
+  animation: jr-respire 8s ease-in-out infinite alternate;
+}
+.jr-houle {
+  animation: jr-houle ease-in-out infinite alternate;
+}
+
+/* Transition douce des couleurs pendant le changement de thème
+   (la classe est ajoutée ~0,4 s par le hook useTheme) */
+html.jr-theme-anim *,
+html.jr-theme-anim *::before,
+html.jr-theme-anim *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease, fill 0.3s ease, stroke 0.3s ease,
+    box-shadow 0.3s ease !important;
+}
+
+/* Respect de la préférence « réduire les animations » */
+@media (prefers-reduced-motion: reduce) {
+  .jr-entree,
+  .jr-secousse,
+  .jr-pop,
+  .jr-vague,
+  .jr-flux,
+  .jr-bulle,
+  .jr-scintille,
+  .jr-eclair,
+  .jr-respire,
+  .jr-toast,
+  .jr-shimmer,
+  .jr-houle {
+    animation: none !important;
+  }
+  .jr-bulle,
+  .jr-scintille {
+    display: none;
+  }
+  .jr-progression {
+    animation-duration: 0.01s !important;
+  }
+  .jr-field,
+  .jr-btn {
+    transition: none;
+  }
+  html.jr-theme-anim *,
+  html.jr-theme-anim *::before,
+  html.jr-theme-anim *::after {
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   ADMIN : SURFACES, PONT DE COMPATIBILITÉ ET GRAPHIQUES
+   .jr-admin est posé par <AdminShell>. Les classes Tailwind
+   « en dur » (slate, white, blue…) y sont redirigées vers les
+   variables --jr-* : le mode clair/sombre s'applique partout.
+   Migrez-les vers jr-* au fil du temps, puis supprimez le pont.
+========================================================= */
+body,
+.dark body {
+  background-color: var(--jr-fond);
+  color: var(--jr-texte);
+}
+
+/* Fond commun des espaces Admin, Agent, Responsable et authentification.
+   Les accents eau/électricité restent discrets pour laisser la priorité aux données. */
+.jr-page {
+  isolation: isolate;
+  color: var(--jr-texte);
+  background-color: var(--jr-fond);
+  background-image: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--jr-fond-debut) 38%, var(--jr-fond)) 0%,
+    var(--jr-fond) 62%,
+    color-mix(in srgb, var(--jr-fond-fin) 24%, var(--jr-fond)) 100%
+  );
+}
+.jr-page--fixed {
+  background-attachment: fixed;
+}
+.jr-page__motif {
+  z-index: 0;
+  opacity: 0.20;
+}
+.jr-page[data-intensite='vivant'] .jr-page__motif {
+  opacity: 0.28;
+}
+.jr-page__accent {
+  background: radial-gradient(circle, var(--jr-halo-eau) 0%, transparent 70%);
+  opacity: 0.16;
+}
+.dark .jr-page__motif {
+  opacity: 0.14;
+}
+.dark .jr-page[data-intensite='vivant'] .jr-page__motif {
+  opacity: 0.20;
+}
+@media (max-width: 640px) {
+  .jr-page__motif { opacity: 0.11; }
+  .jr-page[data-intensite='vivant'] .jr-page__motif { opacity: 0.15; }
+}
+
+
+/* Surfaces semi-opaques : le fond Jirama reste visible entre les cartes */
+.jr-verre {
+  background-color: color-mix(in srgb, var(--jr-surface) 95%, transparent);
+}
+.jr-verre-fort {
+  background-color: color-mix(in srgb, var(--jr-surface) 98%, transparent);
+}
+
+/* Cartes KPI Eau / Électricité */
+.jr-carte-eau {
+  border: 1px solid color-mix(in srgb, var(--jr-eau-clair) 40%, transparent);
+  background-color: color-mix(in srgb, var(--jr-surface) 95%, transparent);
+  background-image: linear-gradient(135deg, var(--jr-eau-pale), transparent 70%);
+}
+.jr-carte-elec {
+  border: 1px solid color-mix(in srgb, var(--jr-elec) 40%, transparent);
+  background-color: color-mix(in srgb, var(--jr-surface) 95%, transparent);
+  background-image: linear-gradient(135deg, var(--jr-elec-pale), transparent 70%);
+}
+
+/* ----- Fonds ----- */
+.jr-admin .bg-white {
+  background-color: var(--jr-surface);
+}
+.jr-admin .focus\:bg-white:focus {
+  background-color: var(--jr-surface);
+}
+.jr-admin .bg-slate-50,
+.jr-admin .bg-slate-50\/50,
+.jr-admin .bg-slate-50\/70,
+.jr-admin .bg-slate-50\/80 {
+  background-color: var(--jr-champ);
+}
+.jr-admin .bg-slate-100,
+.jr-admin .bg-slate-200\/60,
+.jr-admin .bg-slate-200\/70 {
+  background-color: var(--jr-surface-secondaire);
+}
+.jr-admin .hover\:bg-slate-50:hover,
+.jr-admin .hover\:bg-slate-50\/80:hover,
+.jr-admin .hover\:bg-slate-100:hover {
+  background-color: var(--jr-eau-pale);
+}
+.jr-admin .bg-slate-900 {
+  background-color: var(--jr-eau-fonce);
+}
+.jr-admin .hover\:bg-slate-800:hover {
+  background-color: var(--jr-eau);
+}
+.dark .jr-admin .bg-slate-900 {
+  background-color: var(--jr-eau);
+}
+.dark .jr-admin .hover\:bg-slate-800:hover {
+  background-color: var(--jr-eau-clair);
+}
+
+/* Pastilles de couleur (icônes des KPI, alertes) */
+.jr-admin .bg-blue-50,
+.jr-admin .bg-sky-50 {
+  background-color: var(--jr-eau-pale);
+}
+.jr-admin .bg-amber-50 {
+  background-color: var(--jr-elec-pale);
+}
+.jr-admin .bg-emerald-50 {
+  background-color: var(--jr-ok-pale);
+}
+.jr-admin .bg-red-50,
+.jr-admin .bg-red-50\/80 {
+  background-color: var(--jr-err-pale);
+}
+
+/* ----- Textes ----- */
+.jr-admin .text-slate-900,
+.jr-admin .text-slate-800,
+.jr-admin .hover\:text-slate-900:hover {
+  color: var(--jr-texte);
+}
+.jr-admin .text-slate-700,
+.jr-admin .text-slate-600 {
+  color: var(--jr-texte-doux);
+}
+.jr-admin .text-slate-500,
+.jr-admin .text-slate-400 {
+  color: var(--jr-texte-faible);
+}
+.jr-admin .text-blue-600,
+.jr-admin .text-blue-700,
+.jr-admin .text-sky-600,
+.jr-admin .text-sky-700 {
+  color: var(--jr-lien);
+}
+.jr-admin .text-amber-500 {
+  color: var(--jr-elec);
+}
+.jr-admin .text-amber-600,
+.jr-admin .text-amber-700 {
+  color: var(--jr-attention);
+}
+.jr-admin .text-emerald-600,
+.jr-admin .text-emerald-700 {
+  color: var(--jr-ok);
+}
+.jr-admin .text-red-500,
+.jr-admin .text-red-600,
+.jr-admin .text-red-700 {
+  color: var(--jr-err);
+}
+/* Pastille orange du compteur de notifications : texte foncé sur orange */
+.jr-admin .bg-amber-400.text-slate-900 {
+  color: var(--jr-sur-elec);
+}
+
+/* ----- Bordures ----- */
+.jr-admin .border-slate-100,
+.jr-admin .border-slate-200,
+.jr-admin .border-slate-300,
+.jr-admin .border-slate-200\/80 {
+  border-color: var(--jr-bordure);
+}
+.jr-admin .hover\:border-slate-300:hover {
+  border-color: var(--jr-bordure-forte);
+}
+.jr-admin .border-red-200 {
+  border-color: var(--jr-err-bordure);
+}
+.jr-admin .divide-slate-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--jr-bordure);
+}
+
+/* ----- Champs et focus ----- */
+.dark .jr-admin input,
+.dark .jr-admin select {
+  color-scheme: dark;
+}
+.jr-admin :is(button, a, [role='button'], [tabindex]):focus-visible {
+  outline: 2px solid var(--jr-focus);
+  outline-offset: 2px;
+}
+
+/* ----- Graphiques recharts : info-bulles et légendes ----- */
+.jr-admin .recharts-default-tooltip {
+  background-color: var(--jr-surface) !important;
+  border-color: var(--jr-bordure) !important;
+  border-radius: 0.75rem;
+}
+.jr-admin .recharts-tooltip-label,
+.jr-admin .recharts-tooltip-item {
+  color: var(--jr-texte) !important;
+}
+.jr-admin .recharts-legend-item-text {
+  color: var(--jr-texte-doux) !important;
+}
+
+/* =========================================================
+   PAGE ABONNÉS : grain, bouton orange, squelette, toast
+========================================================= */
+
+/* Grain très léger sur le fond (opacité <= 4 %) */
+.jr-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+}
+.dark .jr-grain {
+  opacity: 0.04;
+  mix-blend-mode: screen;
+}
+
+/* Bouton d'action principal : orange électrique, texte bleu foncé */
+.jr-btn-elec {
+  background-color: var(--jr-elec);
+  color: var(--jr-sur-elec);
+  transition: filter 0.15s, transform 0.1s;
+}
+.jr-btn-elec:hover:not(:disabled) {
+  filter: brightness(1.07);
+}
+.jr-btn-elec:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* Squelette de chargement */
+@keyframes jr-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.jr-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    var(--jr-eau-pale) 25%,
+    color-mix(in srgb, var(--jr-eau-clair) 24%, transparent) 50%,
+    var(--jr-eau-pale) 75%
+  );
+  background-size: 200% 100%;
+  animation: jr-shimmer 1.6s linear infinite;
+}
+
+/* Toast : entre par la droite */
+@keyframes jr-toast {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.jr-toast {
+  animation: jr-toast 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jr-btn-elec {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   PAGE RELEVÉS : PALETTE OFFICIELLE JIRAMA (mode clair)
+   Active seulement quand la page pose la classe .jr-palette-jirama
+   (voir RelevesPage). Mode sombre et autres pages : inchangés.
+   Bleu #0054A6 · bleu foncé #003B73 · rouge #E30613 · jaune #F7C600
+   Blanc #FFFFFF · gris clair #F4F7FB · gris foncé #263445
+========================================================= */
+html:not(.dark):has(.jr-palette-jirama) {
+  --jr-fond-debut: #edf2f7;
+  --jr-fond: #edf2f7;
+  --jr-fond-fin: #f1f5f9;
+  --jr-surface: #f8fafc;
+  --jr-surface-secondaire: #e8eef5;
+  --jr-champ: #f0f4f8;
+
+  --jr-texte: #263445;
+  --jr-titre: #003b73;
+  --jr-texte-doux: #405166;
+  --jr-texte-faible: #53657b;
+
+  --jr-bordure: color-mix(in srgb, #0054a6 14%, #ffffff);
+  --jr-bordure-forte: color-mix(in srgb, #0054a6 32%, #ffffff);
+
+  --jr-eau: #0054a6;
+  --jr-eau-fonce: #003b73;
+  --jr-eau-clair: color-mix(in srgb, #0054a6 72%, #ffffff);
+  --jr-eau-pale: color-mix(in srgb, #0054a6 8%, #ffffff);
+  --jr-lien: #0054a6;
+
+  --jr-elec: #f7c600;
+  --jr-elec-fonce: color-mix(in srgb, #f7c600 50%, #263445);
+  --jr-elec-pale: color-mix(in srgb, #f7c600 20%, #ffffff);
+  --jr-elec-anneau: color-mix(in srgb, #f7c600 45%, transparent);
+  --jr-attention: color-mix(in srgb, #f7c600 30%, #263445);
+  --jr-sur-elec: #263445;
+
+  --jr-err: #e30613;
+  --jr-err-pale: color-mix(in srgb, #e30613 8%, #ffffff);
+  --jr-err-bordure: color-mix(in srgb, #e30613 40%, #ffffff);
+
+  --jr-focus: #0054a6;
+  --jr-focus-anneau: color-mix(in srgb, #0054a6 28%, transparent);
+}
+
+/* Bouton principal bleu (le bleu domine l'interface) */
+.jr-btn-bleu {
+  background-color: var(--jr-eau);
+  color: #ffffff;
+  transition: background-color 0.15s, transform 0.1s;
+}
+.jr-btn-bleu:hover:not(:disabled) {
+  background-color: var(--jr-eau-fonce);
+}
+.jr-btn-bleu:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* En-tête de tableau : fond bleu très clair, libellés en capitales */
+.jr-thead th {
+  background-color: var(--jr-eau-pale);
+  color: var(--jr-titre);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ---------- Ajout : tuile claire derrière le logo (clair ET sombre) ---------- */
+:root {
+  --jr-logo-fond: #ffffff;
+}
+
+/* =========================================================
+   /IMPECCABLE — HARMONISATION GLOBALE DES ÉCRANS JIRAMA
+   Ces règles raccordent les anciennes classes Tailwind à la palette
+   partagée. Elles s'appliquent aux espaces enveloppés par .jr-admin,
+   sans imposer un style unique au contenu de chaque page.
+========================================================= */
+.jr-admin {
+  color: var(--jr-texte);
+  background: transparent;
+  min-width: 0;
+}
+
+.jr-admin .bg-blue-600,
+.jr-admin .bg-blue-700 {
+  background-color: var(--jr-eau) !important;
+}
+.jr-admin .hover\:bg-blue-700:hover,
+.jr-admin .hover\:bg-blue-800:hover {
+  background-color: var(--jr-eau-fonce) !important;
+}
+.jr-admin .bg-blue-100,
+.jr-admin .bg-cyan-50,
+.jr-admin .bg-sky-100,
+.jr-admin .bg-violet-50 {
+  background-color: var(--jr-eau-pale) !important;
+}
+.jr-admin .hover\:bg-blue-50:hover,
+.jr-admin .hover\:bg-cyan-50:hover,
+.jr-admin .hover\:bg-violet-50:hover {
+  background-color: var(--jr-eau-pale) !important;
+}
+.jr-admin .bg-rose-50,
+.jr-admin .bg-rose-100 {
+  background-color: var(--jr-err-pale) !important;
+}
+.jr-admin .text-blue-800,
+.jr-admin .text-blue-900,
+.jr-admin .text-cyan-700,
+.jr-admin .text-cyan-800,
+.jr-admin .text-violet-700,
+.jr-admin .text-violet-800 {
+  color: var(--jr-lien) !important;
+}
+.jr-admin .text-emerald-800,
+.jr-admin .text-green-700,
+.jr-admin .text-green-800 {
+  color: var(--jr-ok) !important;
+}
+.jr-admin .text-rose-600,
+.jr-admin .text-rose-700,
+.jr-admin .text-rose-800 {
+  color: var(--jr-err) !important;
+}
+.jr-admin .border-blue-100,
+.jr-admin .border-blue-200,
+.jr-admin .border-cyan-200,
+.jr-admin .border-violet-200 {
+  border-color: var(--jr-bordure) !important;
+}
+.jr-admin .border-rose-200,
+.jr-admin .border-rose-300 {
+  border-color: var(--jr-err-bordure) !important;
+}
+
+/* Éviter les débordements transversaux des tableaux et panneaux */
+.jr-admin :is(main, section, article, header, footer, aside) {
+  min-width: 0;
+}
+.jr-admin :is(input, select, textarea) {
+  max-width: 100%;
+}
+
+/* Réduction réelle des mouvements pour toutes les pages */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* =========================================================
+   PRÉFÉRENCES D'AFFICHAGE PERSISTANTES — PAGE PARAMÈTRES JIRAMA
+   Activées par SettingsPage après chargement de la configuration serveur.
+========================================================= */
+html.jr-force-reduced-motion *,
+html.jr-force-reduced-motion *::before,
+html.jr-force-reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
+}
+
+html.jr-compact .jr-admin main {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.jr-theme-anim *,
+  html.jr-theme-anim *::before,
+  html.jr-theme-anim *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: 'Nunito Variable', sans-serif;
+}
+
+h1 {
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+/* =========================================================
+   PRÉFÉRENCES D'AFFICHAGE — taille globale et vidéoprojection
+   Les classes sont appliquées sur <html> par useDisplayPreferences.
+   Les tailles Tailwind exprimées en rem suivent ainsi ces réglages.
+========================================================= */
+html {
+  font-size: 100%;
+  scroll-padding-top: 5.5rem;
+}
+
+html.jr-font-grand {
+  font-size: 112.5%;
+}
+
+html.jr-presentation-mode {
+  font-size: 125%;
+}
+
+/* Police commune cohérente, en utilisant la police déjà fournie localement. */
+body {
+  font-family: 'Nunito Variable', 'Segoe UI', system-ui, sans-serif;
+}
+
+.jr-display-panel {
+  color-scheme: light;
+}
+.dark .jr-display-panel {
+  color-scheme: dark;
+}
+
+/* Les chiffres alignés en colonnes se comparent plus facilement. */
+.jr-admin :is(table, [data-numeric="true"]) {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Dans le mode présentation, privilégier les chiffres et libellés lisibles. */
+html.jr-presentation-mode .jr-admin .recharts-cartesian-axis-tick-value,
+html.jr-presentation-mode .jr-admin .recharts-legend-item-text {
+  font-size: 14px !important;
+}
+
+html.jr-presentation-mode .jr-admin .recharts-tooltip-wrapper,
+html.jr-presentation-mode .jr-admin .recharts-default-tooltip {
+  font-size: 1rem !important;
+}
+
+html.jr-presentation-mode .jr-admin :is(th, td) {
+  font-size: max(0.9rem, 1em) !important;
+  line-height: 1.55;
+  padding-block: 0.75rem;
+}
+
+html.jr-presentation-mode .jr-admin :is(input, select, textarea, button) {
+  line-height: 1.4;
+}
+
+/* Le menu d'affichage doit rester lisible et utilisable en petit écran. */
+@media (max-width: 640px) {
+  html.jr-font-grand { font-size: 106.25%; }
+  html.jr-presentation-mode { font-size: 112.5%; }
+}
+
+/* Respecte toujours la préférence de réduction des animations du système. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* =========================================================
+   CORRECTION DU FOND BLANC ET DU CONTRASTE — JIRAMA
+   Les anciennes classes Tailwind sont reliées aux surfaces thématiques.
+   Les logos et les éléments explicitement conçus sur fond blanc (par
+   exemple les fichiers de marque) gardent leur style propre.
+========================================================= */
+.jr-admin {
+  color: var(--jr-texte);
+}
+
+/* Les cartes et panneaux autrefois forcés en blanc utilisent maintenant
+   un gris bleuté très clair (clair) ou un bleu nuit (sombre). */
+.jr-admin .bg-white,
+.jr-admin .hover\:bg-white:hover,
+.jr-admin .focus\:bg-white:focus {
+  background-color: var(--jr-surface);
+}
+
+.jr-admin .bg-slate-50,
+.jr-admin .bg-slate-50\/50,
+.jr-admin .bg-slate-50\/70,
+.jr-admin .bg-slate-50\/80 {
+  background-color: var(--jr-champ);
+}
+
+.jr-admin .bg-slate-100,
+.jr-admin .bg-slate-200\/60,
+.jr-admin .bg-slate-200\/70 {
+  background-color: var(--jr-surface-secondaire);
+}
+
+.jr-admin .hover\:bg-slate-50:hover,
+.jr-admin .hover\:bg-slate-100:hover,
+.jr-admin .hover\:bg-slate-200:hover {
+  background-color: var(--jr-eau-pale);
+}
+
+/* Les libellés secondaires restent assez foncés, y compris en petite taille. */
+.jr-admin .text-gray-400,
+.jr-admin .text-gray-500,
+.jr-admin .text-slate-400,
+.jr-admin .text-slate-500 {
+  color: var(--jr-texte-faible);
+}
+.jr-admin .text-gray-600,
+.jr-admin .text-gray-700,
+.jr-admin .text-slate-600,
+.jr-admin .text-slate-700 {
+  color: var(--jr-texte-doux);
+}
+.jr-admin .text-gray-800,
+.jr-admin .text-gray-900,
+.jr-admin .text-slate-800,
+.jr-admin .text-slate-900 {
+  color: var(--jr-texte);
+}
+
+/* Contrôles de saisie : fond et texte explicites dans les deux thèmes. */
+.jr-admin :is(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']):not([type='submit']):not([type='button']):not([type='reset']), select, textarea) {
+  background-color: var(--jr-champ);
+  color: var(--jr-texte);
+  border-color: var(--jr-bordure-forte);
+}
+.jr-admin :is(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']):not([type='submit']):not([type='button']):not([type='reset']), textarea)::placeholder {
+  color: var(--jr-texte-faible);
+  opacity: 1;
+}
+.jr-admin :is(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']):not([type='submit']):not([type='button']):not([type='reset']), select, textarea):focus {
+  border-color: var(--jr-focus);
+}
+.dark .jr-admin :is(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']):not([type='submit']):not([type='button']):not([type='reset']), select, textarea) {
+  color-scheme: dark;
+}
+
+/* Une palette légèrement teintée, sans dégradé blanc omniprésent. */
+.jr-admin :is(table, thead, tbody) {
+  color: var(--jr-texte);
+}
+.jr-admin thead th {
+  background-color: var(--jr-eau-pale);
+  color: var(--jr-texte);
+}
+.jr-admin tbody tr:hover {
+  background-color: var(--jr-eau-pale);
+}
+
+/* Maintenir un focus net au clavier et des transitions discrètes. */
+.jr-admin :is(button, a, input, select, textarea):focus-visible {
+  outline-color: var(--jr-focus);
+}
+
+
+
+/* =========================================================
+   SYSTÈME DE DESIGN JIRAMA — HARMONISATION NOVEMBRE 2026
+   Couche additive et limitée aux espaces .jr-admin.
+   Elle conserve les classes Tailwind et les tokens historiques.
+========================================================= */
+:root {
+  --jr-surface-raised: #ffffff;
+  --jr-surface-muted: #f3f6fa;
+  --jr-text-primary: #172536;
+  --jr-text-secondary: #405166;
+  --jr-text-tertiary: #61738a;
+  --jr-border-subtle: #e0e7ef;
+  --jr-border-strong: #bdcad9;
+  --jr-shadow-card: 0 1px 2px rgba(15, 35, 60, 0.04), 0 5px 16px rgba(15, 35, 60, 0.035);
+  --jr-shadow-elevated: 0 12px 28px rgba(15, 35, 60, 0.12);
+  --jr-radius-control: 10px;
+  --jr-radius-panel: 16px;
+  --jr-radius-dialog: 20px;
+  --jr-content-width: 1720px;
+}
+
+.dark {
+  --jr-surface-raised: #0d2646;
+  --jr-surface-muted: #102d50;
+  --jr-text-primary: #e8f0fa;
+  --jr-text-secondary: #b3c5dd;
+  --jr-text-tertiary: #8fa6c4;
+  --jr-border-subtle: #1a3b67;
+  --jr-border-strong: #2e5a94;
+  --jr-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.12), 0 5px 18px rgba(0, 0, 0, 0.10);
+  --jr-shadow-elevated: 0 16px 34px rgba(0, 0, 0, 0.28);
+}
+
+/* L'arrière-plan du logiciel reste institutionnel : le motif eau/énergie
+   est conservé dans les ressources, mais ne concurrence plus les données. */
+.jr-page[data-intensite] {
+  background-color: var(--jr-fond) !important;
+  background-image: linear-gradient(145deg,
+    color-mix(in srgb, var(--jr-fond) 91%, transparent) 0%,
+    color-mix(in srgb, var(--jr-fond-debut) 88%, transparent) 56%,
+    color-mix(in srgb, var(--jr-fond) 92%, transparent) 100%),
+    url('/images/jirama-antsirabe-infrastructures.webp') !important;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  background-attachment: initial, fixed;
+}
+.jr-page[data-intensite] > .pointer-events-none {
+  display: none !important;
+}
+.dark .jr-page[data-intensite] {
+  background-image: linear-gradient(145deg,
+    color-mix(in srgb, var(--jr-fond) 94%, transparent) 0%,
+    color-mix(in srgb, var(--jr-fond-debut) 91%, transparent) 56%,
+    color-mix(in srgb, var(--jr-fond) 95%, transparent) 100%),
+    url('/images/jirama-antsirabe-infrastructures.webp') !important;
+}
+
+.jr-admin {
+  color: var(--jr-text-primary);
+  font-family: 'Nunito Variable', 'Segoe UI', system-ui, sans-serif;
+}
+
+.jr-admin .jr-app-sidebar {
+  background: var(--jr-surface) !important;
+  border-color: var(--jr-border-subtle) !important;
+  box-shadow: 8px 0 28px rgba(12, 38, 70, 0.055) !important;
+  backdrop-filter: none !important;
+}
+.dark .jr-admin .jr-app-sidebar {
+  box-shadow: 8px 0 28px rgba(0, 0, 0, 0.16) !important;
+}
+
+.jr-admin .jr-app-header {
+  top: 0 !important;
+  background: color-mix(in srgb, var(--jr-surface) 96%, transparent) !important;
+  border-color: var(--jr-border-subtle) !important;
+  box-shadow: 0 2px 10px rgba(12, 38, 70, 0.035);
+  backdrop-filter: blur(12px) !important;
+}
+.jr-admin .jr-app-header > div {
+  min-height: 70px;
+  height: 70px !important;
+}
+.dark .jr-admin .jr-app-header {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.jr-admin .jr-shell-profile {
+  border: 1px solid var(--jr-border-subtle);
+  border-radius: 12px !important;
+  background: var(--jr-surface-muted) !important;
+}
+.jr-admin .jr-shell-section-label {
+  color: var(--jr-text-tertiary) !important;
+  letter-spacing: 0.12em;
+  font-size: 0.66rem;
+}
+.jr-admin .jr-shell-nav-link {
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.jr-admin .jr-shell-nav-link[aria-current='page'] {
+  color: var(--jr-eau-fonce) !important;
+  background: var(--jr-eau-pale) !important;
+  border-color: color-mix(in srgb, var(--jr-eau) 20%, var(--jr-bordure)) !important;
+  box-shadow: inset 3px 0 0 var(--jr-eau) !important;
+}
+.dark .jr-admin .jr-shell-nav-link[aria-current='page'] {
+  color: #eaf4ff !important;
+  background: color-mix(in srgb, var(--jr-eau) 26%, var(--jr-surface)) !important;
+  border-color: color-mix(in srgb, var(--jr-eau-clair) 38%, var(--jr-bordure)) !important;
+}
+.jr-admin .jr-shell-nav-link[aria-current='page'] :is(span, svg) {
+  color: inherit !important;
+}
+.jr-admin .jr-shell-nav-link:hover:not([aria-current='page']) {
+  background: var(--jr-eau-pale) !important;
+  border-color: var(--jr-border-subtle) !important;
+}
+.jr-admin .jr-shell-logout {
+  min-height: 44px;
+  border-radius: 10px !important;
+}
+
+.jr-admin .jr-app-main {
+  width: 100%;
+  max-width: var(--jr-content-width);
+  margin-inline: auto;
+}
+.jr-admin main {
+  min-width: 0;
+}
+
+/* Surfaces métier : bordure fine, ombre légère, aucune élévation excessive. */
+.jr-admin main :is(.shadow-sm, .shadow-md) {
+  box-shadow: var(--jr-shadow-card) !important;
+}
+.jr-admin main :is(.shadow-lg, .shadow-xl, .shadow-2xl) {
+  box-shadow: var(--jr-shadow-elevated) !important;
+}
+.jr-admin main .rounded-3xl.border,
+.jr-admin main .rounded-2xl.border {
+  border-color: var(--jr-border-subtle);
+}
+.jr-admin .jr-carte-eau {
+  border-color: color-mix(in srgb, var(--jr-eau) 24%, var(--jr-bordure));
+  background: var(--jr-surface) !important;
+  box-shadow: var(--jr-shadow-card);
+}
+.jr-admin .jr-carte-elec {
+  border-color: color-mix(in srgb, var(--jr-elec) 30%, var(--jr-bordure));
+  background: var(--jr-surface) !important;
+  box-shadow: var(--jr-shadow-card);
+}
+
+/* Tableaux de données : en-têtes structurés et chiffres faciles à comparer. */
+.jr-admin main table {
+  color: var(--jr-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.jr-admin main table thead th {
+  background: var(--jr-surface-muted);
+  color: var(--jr-text-secondary);
+  border-bottom: 1px solid var(--jr-border-strong);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+.jr-admin main table tbody td {
+  border-bottom: 1px solid var(--jr-border-subtle);
+}
+.jr-admin main table tbody tr:last-child td {
+  border-bottom-color: transparent;
+}
+.jr-admin main table tbody tr:hover td {
+  background: color-mix(in srgb, var(--jr-eau-pale) 58%, transparent);
+}
+
+/* Formulaires et commandes : taille de cible stable, focus visible. */
+.jr-admin main :is(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']), select, textarea) {
+  min-height: 42px;
+  border-radius: var(--jr-radius-control);
+}
+.jr-admin main textarea {
+  min-height: 100px;
+}
+.jr-admin main :is(button, a, [role='button']) {
+  -webkit-tap-highlight-color: transparent;
+}
+.jr-admin main :is(button, a, [role='button']):focus-visible {
+  outline: 2px solid var(--jr-focus) !important;
+  outline-offset: 3px !important;
+}
+
+@media (max-width: 640px) {
+  .jr-admin .jr-app-header > div {
+    min-height: 64px;
+    height: 64px !important;
+    padding-inline: 0.875rem;
+  }
+  .jr-admin .jr-app-main {
+    padding-inline: 0.875rem;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+  }
+  .jr-admin main table {
+    font-size: 0.82rem;
+  }
+  .jr-admin main table thead th {
+    font-size: 0.66rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jr-admin .jr-shell-nav-link {
+    transition: none !important;
+  }
+}
+
+
+/* Bannières métier distinctes pour les trois espaces JIRAMA. */
+.jr-admin .jr-dashboard-banner {
+  isolation: isolate;
+  background-color: var(--jr-surface);
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-color: var(--jr-bordure);
+  box-shadow: var(--jr-shadow-card);
+}
+.jr-admin .jr-dashboard-banner--admin {
+  background-image: linear-gradient(90deg, rgba(8, 32, 67, 0.90) 0%, rgba(8, 55, 108, 0.70) 48%, rgba(8, 55, 108, 0.18) 100%), url('/images/jirama-antsirabe-infrastructures.webp') !important;
+  background-position: center, 72% center;
+  color: #fff;
+}
+.jr-admin .jr-dashboard-banner--responsable {
+  background-image: linear-gradient(90deg, rgba(8, 32, 67, 0.90) 0%, rgba(8, 55, 108, 0.66) 48%, rgba(8, 55, 108, 0.16) 100%), url('/images/jirama-antsirabe-infrastructures.webp') !important;
+  background-position: center, 48% center;
+  color: #fff;
+}
+.jr-admin .jr-dashboard-banner--agent {
+  background-image: linear-gradient(90deg, rgba(8, 32, 67, 0.92) 0%, rgba(8, 55, 108, 0.70) 50%, rgba(8, 55, 108, 0.18) 100%), url('/images/jirama-antsirabe-infrastructures.webp') !important;
+  background-position: center, 25% center;
+  color: #fff;
+}
+.dark .jr-admin .jr-dashboard-banner--admin,
+.dark .jr-admin .jr-dashboard-banner--responsable,
+.dark .jr-admin .jr-dashboard-banner--agent {
+  background-image: linear-gradient(90deg, rgba(4, 17, 35, 0.94) 0%, rgba(5, 36, 72, 0.76) 52%, rgba(5, 36, 72, 0.24) 100%), url('/images/jirama-antsirabe-infrastructures.webp') !important;
+}
+@media (max-width: 640px) {
+  .jr-admin .jr-dashboard-banner {
+    background-position: 68% center;
+    background-size: auto 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jr-admin .jr-dashboard-banner { scroll-behavior: auto; }
+}
+
+
+/* Navigation latérale stable : pas de scroll interne, tous les outils restent
+   accessibles dans la hauteur de l'écran. Les petits écrans gagnent en densité. */
+.jr-admin .jr-app-sidebar {
+  height: 100dvh;
+  overflow: hidden;
+}
+.jr-admin .jr-app-sidebar > nav {
+  min-height: 0;
+  overflow: hidden;
+}
+.jr-admin .jr-shell-nav-link {
+  min-height: 36px;
+  padding-block: 0.375rem;
+  font-size: 0.79rem;
+}
+@media (max-height: 760px) {
+  .jr-admin .jr-app-sidebar .jr-shell-profile { padding: 0.55rem !important; }
+  .jr-admin .jr-app-sidebar .jr-shell-section-label { margin-bottom: 0.25rem !important; }
+  .jr-admin .jr-shell-nav-link { min-height: 32px; padding-block: 0.25rem; }
+  .jr-admin .jr-app-sidebar > div:last-child { padding: 0.4rem !important; }
+}
+.jr-admin .jr-dashboard-banner :is(h1, h2, h3, p, span) {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(3, 18, 40, 0.28);
+}
+@media (prefers-reduced-motion: reduce) {
+  .jr-admin .jr-app-sidebar,
+  .jr-admin .jr-shell-nav-link { scroll-behavior: auto; transition: none !important; }
+}

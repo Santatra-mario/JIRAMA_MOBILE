@@ -1,0 +1,32 @@
+# Variables d'environnement et secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
+
+# Dépendances et builds
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+build/
+**/build/
+.vite/
+**/.vite/
+
+# Données locales, exports et sauvegardes de bases
+*.dump
+*.backup
+*.bak
+*.log
+
+# Cache et fichiers propres aux IDE / OS
+Microsoft/Windows/PowerShell/ModuleAnalysisCache
+.idea/
+.vscode/.ropeproject/
+.DS_Store
+Thumbs.db
